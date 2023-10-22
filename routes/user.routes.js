@@ -1,15 +1,17 @@
-const { getAllProducts } = require("../controllers/productController");
-const { createUser, removeUser, updateUser, getSingleUser, getAllUsers } = require("../controllers/usersController");
+
+const {  removeUser, updateUser, getSingleUser, getAllUsers, registerUser, loginUser } = require("../controllers/usersController");
 
 const router = require("express").Router();
-
+router.post('/login',loginUser)
 router
     /**
      *  @apiGet to get all the courses
-     *  @url  http://localhost:5000/api/products
+     *  @url  http://localhost:5050/api/users/register
      **/
-    .post('/register', createUser)
-    .delete('/remove/:userId', removeUser)
+    .post('/register', registerUser)
+
+
+router.delete('/remove/:userId', removeUser)
 router
     .patch('/update/:userId', updateUser)
 

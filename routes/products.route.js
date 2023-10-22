@@ -1,19 +1,21 @@
-const { getAllProducts, addProduct, removeProduct, updateProduct, getAProduct, getProducts } = require("../controllers/productController");
+const {
+  getAllProducts,
+  removeProduct,
+  updateProduct,
+  getAProduct,
+  createProduct,
+  upload,
+} = require("../controllers/productController");
 
 const router = require("express").Router();
 
-router
-    /**
-     *  @apiGet to get all the courses
-     *  @url  http://localhost:5000/api/products
-     */
-    .get('/all', getAllProducts)
-    .post('/', addProduct)
-    .delete('/remove/:id', removeProduct)
-router
-    .patch('/update/:id', updateProduct)
+router.post("/", upload.single("thumbnail"), createProduct);
+// http://localhost:5050/uploads/{filename}
 
-router.get('/by-id/:id', getAProduct)
-router.get('/', getProducts)
+router.get("/", getAllProducts);
+router.delete("/remove/:id", removeProduct);
+router.patch("/update/:id", upload.single("thumbnail"), updateProduct);
+
+router.get("/:id", getAProduct);
 
 module.exports = router;
