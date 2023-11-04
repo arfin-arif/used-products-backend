@@ -30,7 +30,6 @@ module.exports.createSiteName = async (req, res, next) => {
 
     // Clear existing data
     await SiteName.deleteMany({});
-
     const siteneme = new SiteName({
       siteName,
       image: req.file.filename,
